@@ -1,0 +1,80 @@
+{
+    "form": {
+        "wqbigv4223j": {
+            "type": "md",
+            "opts": {
+                "text": "This is some sample text."
+            }
+        },
+        "4ycaa1idwmc": {
+            "type": "multiradio",
+            "q": "Question 1",
+            "opts": {
+                "values": [
+                    {
+                        "v": "True",
+                        "uid": "e41jrqx2db4"
+                    },
+                    {
+                        "v": "False",
+                        "uid": "p1aqzi86bat"
+                    }
+                ],
+                "items": [
+                    {
+                        "v": "This is the first sentence.",
+                        "uid": "7nhpbhpriih"
+                    },
+                    {
+                        "v": "This is the second sentence.",
+                        "uid": "qka4uxg94el"
+                    }
+                ],
+                "required": true,
+                "uid": "zz7p3ykv54s"
+            }
+        },
+        "fsgjzqlranp": {
+            "type": "page"
+        },
+        "gd6shv3aafz": {
+            "type": "multiradio",
+            "q": "Question 2",
+            "opts": {
+                "values": [
+                    {
+                        "v": "True",
+                        "uid": "vbi2ogtzynp"
+                    },
+                    {
+                        "v": "False",
+                        "uid": "s2sorbbz9vo"
+                    }
+                ],
+                "items": [
+                    {
+                        "v": "This is the third sentence.",
+                        "uid": "gs91t4is8uq"
+                    },
+                    {
+                        "v": "This is the fourth sentence.",
+                        "uid": "jt8a23503su"
+                    }
+                ],
+                "required": true,
+                "uid": "pc5uhsrmmtw"
+            }
+        },
+        "fzyth92sixo": {
+            "type": "page"
+        }
+    },
+    "order": [
+        "wqbigv4223j",
+        "4ycaa1idwmc",
+        "fsgjzqlranp",
+        "gd6shv3aafz",
+        "fzyth92sixo"
+    ],
+    "version": 1
+}
