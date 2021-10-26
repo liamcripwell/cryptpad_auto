@@ -21,6 +21,8 @@ pytest tests
 
 Forms are generating based on a template provided by the user. The accepted format is similar to the JSON used by CryptPad, but excludes some information like `uid` fields. It should take the form of an ordered list of JSON objects specifying each component to be included in the form.
 
+The special `from_data` component type should be used to generate a part of the template for each item in the dataset. Column or attribute values of the item can by referenced in any text value by placing them between `$`s (e.g. `$column_name$`)
+
 ```json
 [
   {
