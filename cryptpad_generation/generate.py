@@ -1,7 +1,8 @@
 import re
 import json
+from copy import deepcopy
 
-from cryptpad_generation.utils import rand_uid
+from cryptpad_generation.utils import rand_uid, needs_uid
 
 
 def sub_values(obj, data):
@@ -14,10 +15,10 @@ def sub_values(obj, data):
         for key, value in obj.items():
             obj[key] = sub_values(value, data)
         # TODO: need to keep log of used uids
-        if not "type" in obj.keys():
+        if needs_uid(obj):
             obj["uid"] = rand_uid()
     elif isinstance(obj, str):
-        obj = re.sub(flag_pat, 
+        obj = re.sub(flag_pat,
                 lambda m: str(data.get(m.group(1), m.group(0))), obj)
 
     return obj
@@ -38,7 +39,7 @@ def generate_form(data, template):
         if component["type"] == "from_data":
             for row in data:
                 for sub_component in component["body"]:
-                    results.append(sub_values(sub_component, row))
+                    results.append(sub_values(deepcopy(sub_component), row))
         else:
             results.append(component)
         
