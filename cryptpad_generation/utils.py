@@ -12,7 +12,8 @@ def is_uid(xs):
 
 
 def needs_uid(obj):
-    # TODO: handle "ops" objects within primary components
-    if not "type" in obj.keys():
+    if any([k in obj.keys() for k in ["type"]]):
+        return False
+    elif any([k in obj.keys() for k in ["v"]]):
         return True
     return False

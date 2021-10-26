@@ -1,12 +1,12 @@
 {
     "form": {
-        "wqbigv4223j": {
+        "jt8a23503su": {
             "type": "md",
             "opts": {
                 "text": "This is some sample text."
             }
         },
-        "4ycaa1idwmc": {
+        "pc5uhsrmmtw": {
             "type": "multiradio",
             "q": "Question 1",
             "opts": {
@@ -30,51 +30,49 @@
                         "uid": "qka4uxg94el"
                     }
                 ],
-                "required": true,
-                "uid": "zz7p3ykv54s"
+                "required": true
             }
         },
-        "fsgjzqlranp": {
+        "wqbigv4223j": {
             "type": "page"
         },
-        "gd6shv3aafz": {
+        "4ycaa1idwmc": {
             "type": "multiradio",
             "q": "Question 2",
             "opts": {
                 "values": [
                     {
                         "v": "True",
-                        "uid": "vbi2ogtzynp"
+                        "uid": "zz7p3ykv54s"
                     },
                     {
                         "v": "False",
-                        "uid": "s2sorbbz9vo"
+                        "uid": "vbi2ogtzynp"
                     }
                 ],
                 "items": [
                     {
                         "v": "This is the third sentence.",
-                        "uid": "gs91t4is8uq"
+                        "uid": "s2sorbbz9vo"
                     },
                     {
                         "v": "This is the fourth sentence.",
-                        "uid": "jt8a23503su"
+                        "uid": "gs91t4is8uq"
                     }
                 ],
-                "required": true,
-                "uid": "pc5uhsrmmtw"
+                "required": true
             }
         },
-        "fzyth92sixo": {
+        "fsgjzqlranp": {
             "type": "page"
         }
     },
     "order": [
+        "jt8a23503su",
+        "pc5uhsrmmtw",
         "wqbigv4223j",
         "4ycaa1idwmc",
-        "fsgjzqlranp",
-        "gd6shv3aafz",
-        "fzyth92sixo"
+        "fsgjzqlranp"
     ],
     "version": 1
 }
