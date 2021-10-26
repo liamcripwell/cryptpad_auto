@@ -14,10 +14,11 @@ def sub_values(obj, data):
         for key, value in obj.items():
             obj[key] = sub_values(value, data)
         # TODO: need to keep log of used uids
-        obj["uid"] = rand_uid()
+        if not "type" in obj.keys():
+            obj["uid"] = rand_uid()
     elif isinstance(obj, str):
-        obj = re.sub(flag_pat, lambda m: data.get(m.group(1), 
-                            m.group(0)), obj)
+        obj = re.sub(flag_pat, 
+                lambda m: str(data.get(m.group(1), m.group(0))), obj)
 
     return obj
 
