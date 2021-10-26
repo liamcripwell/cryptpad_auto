@@ -1,1 +1,1 @@
-# cryptpad_generation
+# cryptpad_auto

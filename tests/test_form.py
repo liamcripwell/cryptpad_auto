@@ -3,7 +3,7 @@ import random
 
 import pytest
 
-from cryptpad_generation.generate import FormBuilder
+from cryptpad_auto.generate import FormBuilder
 
 @pytest.fixture
 def basic_data():

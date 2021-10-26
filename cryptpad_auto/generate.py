@@ -3,7 +3,7 @@ import json
 from copy import deepcopy
 from typing import Any, Dict
 
-from cryptpad_generation.utils import rand_uid, needs_uid
+from cryptpad_auto.utils import rand_uid, needs_uid
 
 
 class FormBuilder():
