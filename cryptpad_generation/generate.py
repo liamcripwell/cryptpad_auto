@@ -39,6 +39,8 @@ def generate_form(data, template):
             for row in data:
                 for sub_component in component["body"]:
                     results.append(sub_values(sub_component, row))
+        else:
+            results.append(component)
         
     for component in results:
         uid = rand_uid()
