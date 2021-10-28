@@ -6,8 +6,12 @@ import random
 import pandas as pd
 
 
-def rand_uid():
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=11))
+def rand_uid(blacklist=[]):
+    while True:
+        uid = ''.join(random.choices(string.ascii_lowercase + string.digits, k=11))
+        if uid not in blacklist:
+            break
+    return uid
 
 def is_uid(xs):
     uid_pat = r"[a-z0-9]{11}$"

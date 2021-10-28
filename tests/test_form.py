@@ -61,7 +61,5 @@ def test_basic_df_form_gen_from_file(basic_temp, basic_form):
 def test_all_comp_no_data(all_temp, all_form):
     builder = FormBuilder(all_temp)
     result = builder.build([])
-
-    builder.to_file("test_out.json")
     
     assert result == all_form

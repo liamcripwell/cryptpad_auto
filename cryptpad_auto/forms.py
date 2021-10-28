@@ -17,6 +17,7 @@ class FormBuilder():
         self.reset()
 
     def reset(self) -> Any:
+        self.used_uids = []
         self.doc = {
             "form": {},
             "order": [],
@@ -32,7 +33,8 @@ class FormBuilder():
                 obj[key] = self.sub_values(value, data)
             # TODO: need to keep log of used uids
             if needs_uid(obj):
-                obj["uid"] = rand_uid()
+                obj["uid"] = rand_uid(self.used_uids)
+                self.used_uids.append(obj["uid"])
         elif isinstance(obj, str) and data is not None:
             # substitute flags for column values
             obj = re.sub(self.FLAG, lambda m: str(data.get(m.group(1), m.group(0))), obj)
@@ -59,7 +61,8 @@ class FormBuilder():
             
         # build final form document structure
         for component in results:
-            uid = rand_uid()
+            uid = rand_uid(self.used_uids)
+            self.used_uids.append(uid)
             self.doc["form"][uid] = component
             self.doc["order"].append(uid)
 
