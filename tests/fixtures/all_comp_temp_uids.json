@@ -1,0 +1,135 @@
+[
+    {
+        "type": "radio",
+        "opts": {
+            "values": [
+                {
+                    "v": "Option 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Option 2",
+                    "uid": "f4ke1d"
+                }
+            ]
+        },
+        "q": "choice question"
+    },
+    {
+        "type": "input",
+        "opts": {
+            "type": "number"
+        },
+        "q": "text field"
+    },
+    {
+        "type": "textarea",
+        "opts": {
+            "maxLength": 1000
+        },
+        "q": "paragraph thing"
+    },
+    {
+        "type": "multiradio",
+        "opts": {
+            "items": [
+                {
+                    "v": "Item 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Item 2",
+                    "uid": "f4ke1d"
+                }
+            ],
+            "values": [
+                {
+                    "v": "Option 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Option 2",
+                    "uid": "f4ke1d"
+                }
+            ]
+        }
+    },
+    {
+        "type": "checkbox",
+        "opts": {
+            "max": 3,
+            "values": [
+                {
+                    "v": "Option 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Option 2",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Option 3",
+                    "uid": "f4ke1d"
+                }
+            ]
+        },
+        "q": "checkbox question"
+    },
+    {
+        "type": "multicheck",
+        "opts": {
+            "max": 3,
+            "items": [
+                {
+                    "v": "Item 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Item 2",
+                    "uid": "f4ke1d"
+                }
+            ],
+            "values": [
+                {
+                    "v": "Option 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Option 2",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "Option 3",
+                    "uid": "f4ke1d"
+                }
+            ]
+        }
+    },
+    {
+        "type": "sort",
+        "opts": {
+            "values": [
+                {
+                    "v": "option 1",
+                    "uid": "f4ke1d"
+                },
+                {
+                    "v": "option 1",
+                    "uid": "f4ke1d"
+                }
+            ]
+        }
+    },
+    {
+        "type": "poll"
+    },
+    {
+        "type": "md",
+        "opts": {
+            "text": "This is a basic description field"
+        }
+    },
+    {
+        "type": "page"
+    }
+]

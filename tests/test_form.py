@@ -23,6 +23,10 @@ def all_temp():
     return json.load(open("tests/fixtures/all_comp_temp.json", "r"))
 
 @pytest.fixture
+def all_temp_uids():
+    return json.load(open("tests/fixtures/all_comp_temp_uids.json", "r"))
+
+@pytest.fixture
 def basic_form():
     return json.load(open("tests/fixtures/basic_form.json", "r"))
 
@@ -60,6 +64,12 @@ def test_basic_df_form_gen_from_file(basic_temp, basic_form):
 
 def test_all_comp_no_data(all_temp, all_form):
     builder = FormBuilder(all_temp)
+    result = builder.build([])
+    
+    assert result == all_form
+
+def test_all_comp_no_data(all_temp_uids, all_form):
+    builder = FormBuilder(all_temp_uids)
     result = builder.build([])
     
     assert result == all_form
