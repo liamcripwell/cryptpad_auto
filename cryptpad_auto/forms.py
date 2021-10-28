@@ -10,7 +10,7 @@ class FormBuilder():
 
     FLAG = r'\$([a-zA-z0-9]+)\$'
 
-    def __init__(self, template) -> Any:
+    def __init__(self, template=None) -> Any:
         if isinstance(template, str):
             template = json.load(open(template, "r"))
         self.template = template
@@ -42,6 +42,9 @@ class FormBuilder():
         return obj
 
     def build(self, data) -> Dict:
+        if self.template is None:
+            raise ValueError("Cannot build form when no template has been provided.")
+
         self.reset()
 
         # prepare data and iterator
