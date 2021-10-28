@@ -1,6 +1,9 @@
 import re
+import json
 import string
 import random
+
+import pandas as pd
 
 
 def rand_uid():
@@ -16,3 +19,19 @@ def needs_uid(obj):
     elif any([k in obj.keys() for k in ["v"]]):
         return True
     return False
+
+def get_data_iterator(data):
+    if isinstance(data, list):
+        data_iter = enumerate(data)
+    elif isinstance(data, pd.DataFrame):
+        data_iter = data.iterrows()
+
+    return data_iter
+
+def read_data_file(data):
+    if isinstance(data, str):
+        if data.endswith(".json"):
+            data = json.load(open(data, "r"))
+        elif data.endswith(".csv"):
+            data = pd.read_csv(data)
+    return data

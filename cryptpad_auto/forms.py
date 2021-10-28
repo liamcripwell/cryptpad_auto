@@ -3,9 +3,7 @@ import json
 from copy import deepcopy
 from typing import Any, Dict
 
-import pandas as pd
-
-from cryptpad_auto.utils import rand_uid, needs_uid
+from cryptpad_auto.utils import rand_uid, needs_uid, get_data_iterator, read_data_file
 
 
 class FormBuilder():
@@ -44,14 +42,9 @@ class FormBuilder():
     def build(self, data) -> Dict:
         self.reset()
 
-        # prepare appropriate iterator for data
-        data_iter = None
-        if isinstance(data, str):
-            data = json.load(open(data, "r"))
-        if isinstance(data, list):
-            data_iter = enumerate(data)
-        elif isinstance(data, pd.DataFrame):
-            data_iter = data.iterrows()
+        # prepare data and iterator
+        data = read_data_file(data)
+        data_iter = get_data_iterator(data)
 
         results = []
         for component in self.template:
@@ -65,6 +58,7 @@ class FormBuilder():
                 for sub_component in component["body"]:
                     results.append(self.sub_values(deepcopy(sub_component), row))
             
+        # build final form document structure
         for component in results:
             uid = rand_uid()
             self.doc["form"][uid] = component
