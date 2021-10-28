@@ -31,7 +31,7 @@ class FormBuilder():
         elif isinstance(obj, dict):
             for key, value in obj.items():
                 obj[key] = self.sub_values(value, data)
-            # TODO: need to keep log of used uids
+            # add a uid to the object if needed
             if needs_uid(obj):
                 obj["uid"] = rand_uid(self.used_uids)
                 self.used_uids.append(obj["uid"])
