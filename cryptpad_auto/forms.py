@@ -23,17 +23,17 @@ class FormBuilder():
             "version": 1
         }
 
-    def sub_values(self, obj, data) -> Any:
+    def sub_values(self, obj, data=None) -> Any:
         if isinstance(obj, list):
             for i in range(len(obj)):
                 obj[i] = self.sub_values(obj[i], data)
-        if isinstance(obj, dict):
+        elif isinstance(obj, dict):
             for key, value in obj.items():
                 obj[key] = self.sub_values(value, data)
             # TODO: need to keep log of used uids
             if needs_uid(obj):
                 obj["uid"] = rand_uid()
-        elif isinstance(obj, str):
+        elif isinstance(obj, str) and data is not None:
             # substitute flags for column values
             obj = re.sub(self.FLAG, lambda m: str(data.get(m.group(1), m.group(0))), obj)
 
@@ -48,10 +48,9 @@ class FormBuilder():
 
         results = []
         for component in self.template:
-            print(component)
             # append static component to doc
             if component["type"] != "from_data":
-                results.append(component)
+                results.append(self.sub_values(deepcopy(component)))
                 continue
             # build component for each row in data
             for i, row in data_iter:
