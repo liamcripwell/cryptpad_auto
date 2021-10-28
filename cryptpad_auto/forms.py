@@ -3,7 +3,7 @@ import json
 from copy import deepcopy
 from typing import Any, Dict
 
-from cryptpad_auto.utils import rand_uid, needs_uid, get_data_iterator, read_data_file
+from cryptpad_auto.utils import *
 
 
 class FormBuilder():
@@ -67,6 +67,12 @@ class FormBuilder():
             self.doc["order"].append(uid)
 
         return self.doc
+
+    def to_template(self, form):
+        temp = []
+        for component in form["form"].values():
+            temp.append(strip_key_r(deepcopy(component), "uid"))
+        return temp
 
     def to_file(self, f, indent=4) -> Any:
         json.dump(self.doc, open(f, "w"), indent=indent)

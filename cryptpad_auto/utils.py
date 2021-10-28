@@ -24,6 +24,17 @@ def needs_uid(obj):
         return True
     return False
 
+def strip_key_r(obj, key):
+    """Recursively strip a key from a dict-like object."""
+    if isinstance(obj, dict):
+        if key in obj:
+            del obj[key]
+        for k, v in obj.items():
+            obj[k] = strip_key_r(v, key)
+    elif isinstance(obj, list):
+        obj = [strip_key_r(v, key) for v in obj]
+    return obj
+
 def get_data_iterator(data):
     if isinstance(data, list):
         data_iter = enumerate(data)

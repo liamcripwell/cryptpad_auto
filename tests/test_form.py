@@ -73,3 +73,11 @@ def test_all_comp_no_data(all_temp_uids, all_form):
     result = builder.build([])
     
     assert result == all_form
+
+def test_template_conversion(all_temp, all_form):
+    builder = FormBuilder(None)
+    builder.template = builder.to_template(all_form)
+    result = builder.build([])
+
+    assert builder.template == all_temp
+    assert result == all_form
