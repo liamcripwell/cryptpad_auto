@@ -20,10 +20,10 @@ pytest tests
 ## Forms
 ### Form Templates
 
-Forms are generating based on a template provided by the user. The accepted format is similar to the JSON used by CryptPad, but with a few modifications. 
+Forms are generated according to a template provided by the user. The accepted format is similar to the JSON used by CryptPad, but with a few modifications. 
 * It should take the form of an ordered list of JSON objects specifying each component to be included in the form.
-* The special `from_data` component type should be used to specify parts of the form that should be created for each item in a dataset.
-* Column or attribute values of the item can by referenced in any text value by placing them between `$` characters (e.g. `"Question: $column_name$"`).
+* The special `from_data` component type should be used to wrap parts of the form that should be created for each item in a dataset.
+* Column or attribute values of the dataset item can by referenced within any text value between `$` flags (e.g. `"Question: $column_name$"`).
 
 For example, the follow template will produce a form with a number input field for each row in the data:
 ```json
@@ -59,7 +59,7 @@ python run.py template --form_file=exported_form.json --out_file=template.json -
 ```
 
 ### Generating Forms
-Forms are generated via the `FormGenerator` class. The template and data can be passed either as filenames or relevant python structures. 
+Forms are generated via the `FormGenerator` class. The template and data can be passed either as filenames or appropriate python data structures. 
 ```python
 from cryptpad_auto.forms import FormBuilder
 
