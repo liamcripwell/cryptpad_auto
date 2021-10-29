@@ -1,6 +1,6 @@
 # cryptpad_auto
 
-This project contains automation tools for CryptPad documents. It provides a templating interface that can be used to generate forms for a given datset. For example, if you had a large set of questions and wanted to generate a form containing a component for each entry.
+This project contains automation tools for [CryptPad](https://github.com/xwiki-labs/cryptpad) documents. It provides a templating interface that can be used to generate forms for a given datset. For example, if you had a large set of questions and wanted to generate a form containing a component for each entry.
 
 ## Installation
 
