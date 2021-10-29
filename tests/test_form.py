@@ -52,8 +52,8 @@ def test_basic_form_gen(basic_data, basic_temp, basic_form):
     
     assert result == basic_form
 
-def test_basic_form_gen_from_file(basic_temp, basic_form):
-    builder = FormBuilder(basic_temp)
+def test_basic_form_gen_from_file(basic_form):
+    builder = FormBuilder("tests/fixtures/basic_template.json")
     result = builder.build("tests/fixtures/basic_data.json")
     
     assert result == basic_form
@@ -64,8 +64,8 @@ def test_basic_df_form_gen(basic_df, basic_temp, basic_form):
     
     assert result == basic_form
 
-def test_basic_df_form_gen_from_file(basic_temp, basic_form):
-    builder = FormBuilder(basic_temp)
+def test_basic_df_form_gen_from_file(basic_form):
+    builder = FormBuilder("tests/fixtures/basic_template.json")
     result = builder.build("tests/fixtures/basic_data.csv")
     
     assert result == basic_form

@@ -11,9 +11,7 @@ class FormBuilder():
     FLAG = r'\$([a-zA-z0-9]+)\$'
 
     def __init__(self, template=None) -> None:
-        if isinstance(template, str):
-            template = json.load(open(template, "r"))
-        self.template = template
+        self.template = read_data_file(template)
         self.reset()
 
     def reset(self) -> None:
@@ -79,9 +77,7 @@ class FormTemplateBuilder():
 
     def __init__(self, form):
         self.reset()
-        if isinstance(form, str):
-            form = json.load(open(form, "r"))
-        self.form = form
+        self.form = read_data_file(form)
 
     def reset(self) -> None:
         self.template = []
