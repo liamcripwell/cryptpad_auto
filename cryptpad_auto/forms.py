@@ -10,13 +10,13 @@ class FormBuilder():
 
     FLAG = r'\$([a-zA-z0-9]+)\$'
 
-    def __init__(self, template=None) -> Any:
+    def __init__(self, template=None) -> None:
         if isinstance(template, str):
             template = json.load(open(template, "r"))
         self.template = template
         self.reset()
 
-    def reset(self) -> Any:
+    def reset(self) -> None:
         self.used_uids = []
         self.doc = {
             "form": {},
@@ -71,19 +71,49 @@ class FormBuilder():
 
         return self.doc
 
-    def to_file(self, f: str, indent=4) -> Any:
+    def to_file(self, f: str, indent=4) -> None:
         json.dump(self.doc, open(f, "w"), indent=indent)
 
 
 class FormTemplateBuilder():
 
     def __init__(self, form):
+        self.reset()
         if isinstance(form, str):
             form = json.load(open(form, "r"))
         self.form = form
 
-    def build(self, data_groups=None) -> List:
-        temp = []
-        for component in self.form["form"].values():
-            temp.append(strip_key_r(deepcopy(component), "uid"))
-        return temp
+    def reset(self) -> None:
+        self.template = []
+
+    def build(self, data_groups=[]) -> List:
+        self.reset()
+
+        components = list(self.form["form"].values())
+        for g in data_groups:
+            group = []
+            for i in range(len(components)):
+                if i in g:
+                    group.append(components[i])
+            components[g[0]] = group
+            for i in g[1:]:
+                components.pop(i)
+
+        for c in components:
+            if isinstance(c, list):
+                sub_cs = [strip_key_r(deepcopy(_c), "uid") for _c in c]
+                self.template.append(self.data_wrap(sub_cs))
+            else:
+                clean_c = strip_key_r(deepcopy(c), "uid")
+                self.template.append(clean_c)
+
+        return self.template
+
+    def to_file(self, f: str, indent=4) -> None:
+        json.dump(self.template, open(f, "w"), indent=indent)
+
+    def data_wrap(self, components: List) -> Dict:
+        return {
+            "type": "from_data",
+            "body": components
+        }

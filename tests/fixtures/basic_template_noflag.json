@@ -1,0 +1,39 @@
+[
+    {
+        "type": "md",
+        "opts": {
+            "text": "This is some sample text."
+        }
+    },
+    {
+        "type": "from_data",
+        "body": [
+            {
+                "type": "multiradio",
+                "q": "Question 1",
+                "opts": {
+                    "values": [
+                        {
+                            "v": "True"
+                        },
+                        {
+                            "v": "False"
+                        }
+                    ],
+                    "items": [
+                        {
+                            "v": "This is the first sentence."
+                        },
+                        {
+                            "v": "This is the second sentence."
+                        }
+                    ],
+                    "required": true
+                }
+            },
+            {
+                "type": "page"
+            }
+        ]
+    }
+]

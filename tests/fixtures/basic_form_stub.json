@@ -1,0 +1,46 @@
+{
+    "form": {
+        "jt8a23503su": {
+            "type": "md",
+            "opts": {
+                "text": "This is some sample text."
+            }
+        },
+        "pc5uhsrmmtw": {
+            "type": "multiradio",
+            "q": "Question 1",
+            "opts": {
+                "values": [
+                    {
+                        "v": "True",
+                        "uid": "e41jrqx2db4"
+                    },
+                    {
+                        "v": "False",
+                        "uid": "p1aqzi86bat"
+                    }
+                ],
+                "items": [
+                    {
+                        "v": "This is the first sentence.",
+                        "uid": "7nhpbhpriih"
+                    },
+                    {
+                        "v": "This is the second sentence.",
+                        "uid": "qka4uxg94el"
+                    }
+                ],
+                "required": true
+            }
+        },
+        "wqbigv4223j": {
+            "type": "page"
+        }
+    },
+    "order": [
+        "jt8a23503su",
+        "pc5uhsrmmtw",
+        "wqbigv4223j"
+    ],
+    "version": 1
+}

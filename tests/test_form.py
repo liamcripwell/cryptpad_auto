@@ -19,6 +19,10 @@ def basic_temp():
     return json.load(open("tests/fixtures/basic_template.json", "r"))
 
 @pytest.fixture
+def basic_temp_noflag():
+    return json.load(open("tests/fixtures/basic_template_noflag.json", "r"))
+
+@pytest.fixture
 def all_temp():
     return json.load(open("tests/fixtures/all_comp_temp.json", "r"))
 
@@ -29,6 +33,10 @@ def all_temp_uids():
 @pytest.fixture
 def basic_form():
     return json.load(open("tests/fixtures/basic_form.json", "r"))
+
+@pytest.fixture
+def basic_form_stub():
+    return json.load(open("tests/fixtures/basic_form_stub.json", "r"))
 
 @pytest.fixture
 def all_form():
@@ -82,3 +90,9 @@ def test_template_conversion(all_temp, all_form):
 
     assert builder.template == all_temp
     assert result == all_form
+
+def test_template_conversion_data(basic_temp_noflag, basic_form_stub):
+    tbuilder = FormTemplateBuilder(basic_form_stub)
+    template = tbuilder.build([[1, 2]])
+
+    assert template == basic_temp_noflag
