@@ -17,7 +17,7 @@ We provide some unit tests to confirm whether the tool is functioning with your 
 pytest tests
 ```
 
-## Generating Forms
+## Forms
 ### Form Templates
 
 Forms are generating based on a template provided by the user. The accepted format is similar to the JSON used by CryptPad, but with a few modifications. 
@@ -56,4 +56,21 @@ python run.py template --form_file=exported_form.json --out_file=template.json
 
 # will wrap the 2nd and 3rd components in a `from_data` structure
 python run.py template --form_file=exported_form.json --out_file=template.json --data_groups="[[1,2]]"
+```
+
+### Generating Forms
+Forms are generated via the `FormGenerator` class. The template and data can be passed either as filenames or relevant python structures. 
+```python
+from cryptpad_auto.forms import FormBuilder
+
+builder = FormBuilder("template_file.json") # can also provide a `dict` template
+
+form = builder.build("some_data.csv") # can also be a `.json` file, `list[dict]` or `pandas.DataFrame` object
+
+builder.to_file("new_form.json")
+```
+
+Alternatively, you can generate a form directly via the terminal:
+```bash
+python run.py form --template_file=template.json --data_file=data.csv --out_file=form.json
 ```
