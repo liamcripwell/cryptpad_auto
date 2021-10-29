@@ -1,22 +1,21 @@
 import re
 import json
 from copy import deepcopy
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from cryptpad_auto.utils import *
 
 
-class FormBuilder():
+class FormBuilder(object):
+    """Builds CryptPad forms from a template and data."""
 
     FLAG = r'\$([a-zA-z0-9]+)\$'
 
-    def __init__(self, template=None) -> Any:
-        if isinstance(template, str):
-            template = json.load(open(template, "r"))
-        self.template = template
+    def __init__(self, template=None) -> None:
+        self.template = read_data_file(template)
         self.reset()
 
-    def reset(self) -> Any:
+    def reset(self) -> None:
         self.used_uids = []
         self.doc = {
             "form": {},
@@ -24,7 +23,8 @@ class FormBuilder():
             "version": 1
         }
 
-    def sub_values(self, obj, data=None) -> Any:
+    def sub_values(self, obj: Any, data=None) -> Any:
+        "Fill in content flags from template and component uids."
         if isinstance(obj, list):
             for i in range(len(obj)):
                 obj[i] = self.sub_values(obj[i], data)
@@ -41,10 +41,9 @@ class FormBuilder():
 
         return obj
 
-    def build(self, data) -> Dict:
+    def build(self, data: Any) -> Dict:
         if self.template is None:
             raise ValueError("Cannot build form when no template has been provided.")
-
         self.reset()
 
         # prepare data and iterator
@@ -58,7 +57,7 @@ class FormBuilder():
                 results.append(self.sub_values(deepcopy(component)))
                 continue
             # build component for each row in data
-            for i, row in data_iter:
+            for _, row in data_iter:
                 for sub_component in component["body"]:
                     results.append(self.sub_values(deepcopy(sub_component), row))
             
@@ -71,12 +70,51 @@ class FormBuilder():
 
         return self.doc
 
-    def to_template(self, form):
-        temp = []
-        for component in form["form"].values():
-            temp.append(strip_key_r(deepcopy(component), "uid"))
-        return temp
-
-    def to_file(self, f, indent=4) -> Any:
+    def to_file(self, f: str, indent=4) -> None:
         json.dump(self.doc, open(f, "w"), indent=indent)
 
+
+class FormTemplateBuilder():
+    """Build a template from an existing CryptPad form."""
+
+    def __init__(self, form):
+        self.reset()
+        self.form = read_data_file(form)
+
+    def reset(self) -> None:
+        self.template = []
+
+    def build(self, data_groups=[]) -> List:
+        self.reset()
+
+        # compile components specified to be in `from_data` groups
+        components = list(self.form["form"].values())
+        for g in data_groups:
+            group = []
+            for i in range(len(components)):
+                if i in g:
+                    group.append(components[i])
+            components[g[0]] = group
+            for i in g[1:]:
+                components.pop(i)
+
+        # clean component objects and add them to template result
+        for c in components:
+            if isinstance(c, list):
+                sub_cs = [strip_key_r(deepcopy(_c), "uid") for _c in c]
+                self.template.append(self.data_wrap(sub_cs))
+            else:
+                clean_c = strip_key_r(deepcopy(c), "uid")
+                self.template.append(clean_c)
+
+        return self.template
+
+    def to_file(self, f: str, indent=4) -> None:
+        json.dump(self.template, open(f, "w"), indent=indent)
+
+    def data_wrap(self, components: List) -> Dict:
+        """Wraps list of components in a `from_data` group."""
+        return {
+            "type": "from_data",
+            "body": components
+        }
