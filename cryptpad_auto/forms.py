@@ -88,7 +88,8 @@ class FormTemplateBuilder():
         self.reset()
 
         # compile components specified to be in `from_data` groups
-        components = list(self.form["form"].values())
+        form_body = self.form["form"]
+        components = [form_body[uid] for uid in self.form["order"]]
         for g in data_groups:
             group = []
             for i in range(len(components)):
