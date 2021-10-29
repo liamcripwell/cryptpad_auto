@@ -4,7 +4,7 @@ import random
 import pytest
 import pandas as pd
 
-from cryptpad_auto.forms import FormBuilder
+from cryptpad_auto.forms import FormBuilder, FormTemplateBuilder
 
 @pytest.fixture
 def basic_data():
@@ -76,7 +76,8 @@ def test_all_comp_no_data(all_temp_uids, all_form):
 
 def test_template_conversion(all_temp, all_form):
     builder = FormBuilder(None)
-    builder.template = builder.to_template(all_form)
+    tbuilder = FormTemplateBuilder(all_form)
+    builder.template = tbuilder.build()
     result = builder.build([])
 
     assert builder.template == all_temp

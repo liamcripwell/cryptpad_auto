@@ -1,7 +1,7 @@
 import re
 import json
 from copy import deepcopy
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from cryptpad_auto.utils import *
 
@@ -24,7 +24,7 @@ class FormBuilder():
             "version": 1
         }
 
-    def sub_values(self, obj, data=None) -> Any:
+    def sub_values(self, obj: Any, data=None) -> Any:
         if isinstance(obj, list):
             for i in range(len(obj)):
                 obj[i] = self.sub_values(obj[i], data)
@@ -41,7 +41,7 @@ class FormBuilder():
 
         return obj
 
-    def build(self, data) -> Dict:
+    def build(self, data: Any) -> Dict:
         if self.template is None:
             raise ValueError("Cannot build form when no template has been provided.")
 
@@ -58,7 +58,7 @@ class FormBuilder():
                 results.append(self.sub_values(deepcopy(component)))
                 continue
             # build component for each row in data
-            for i, row in data_iter:
+            for _, row in data_iter:
                 for sub_component in component["body"]:
                     results.append(self.sub_values(deepcopy(sub_component), row))
             
@@ -71,12 +71,19 @@ class FormBuilder():
 
         return self.doc
 
-    def to_template(self, form):
-        temp = []
-        for component in form["form"].values():
-            temp.append(strip_key_r(deepcopy(component), "uid"))
-        return temp
-
-    def to_file(self, f, indent=4) -> Any:
+    def to_file(self, f: str, indent=4) -> Any:
         json.dump(self.doc, open(f, "w"), indent=indent)
 
+
+class FormTemplateBuilder():
+
+    def __init__(self, form):
+        if isinstance(form, str):
+            form = json.load(open(form, "r"))
+        self.form = form
+
+    def build(self, data_groups=None) -> List:
+        temp = []
+        for component in self.form["form"].values():
+            temp.append(strip_key_r(deepcopy(component), "uid"))
+        return temp
